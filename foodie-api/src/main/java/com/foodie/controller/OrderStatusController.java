@@ -1,0 +1,37 @@
+package com.foodie.controller;
+
+import com.foodie.pojo.OrderStatus;
+import com.foodie.service.OrderStatusService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+
+/**
+ * 订单状态表;订单的每个状态更改都需要进行记录
+10：待付款  20：已付款，待发货  30：已发货，待收货（7天自动确认）  40：交易成功（此时可以评价）50：交易关闭（待付款时，用户取消 或 长时间未付款，系统识别后自动关闭）
+退货/退货，此分支流程不做，所以不加入(OrderStatus)表控制层
+ *
+ * @author makejava
+ * @since 2020-12-08 14:44:01
+ */
+@RestController
+@RequestMapping("orderStatus")
+public class OrderStatusController {
+    /**
+     * 服务对象
+     */
+    @Resource
+    private OrderStatusService orderStatusService;
+
+    /**
+     * 通过主键查询单条数据
+     *
+     * @param id 主键
+     * @return 单条数据
+     */
+    @GetMapping("selectOne")
+    public OrderStatus selectOne(String id) {
+        return this.orderStatusService.queryById(id);
+    }
+
+}

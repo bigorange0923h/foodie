@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodie.mapper.ItemsDao">
+
+    <resultMap id="BaseResultMap" type="com.foodie.pojo.Items">
+        <!--@Table items-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="itemName" column="item_name" jdbcType="VARCHAR"/>
+        <result property="catId" column="cat_id" jdbcType="INTEGER"/>
+        <result property="rootCatId" column="root_cat_id" jdbcType="INTEGER"/>
+        <result property="sellCounts" column="sell_counts" jdbcType="INTEGER"/>
+        <result property="onOffStatus" column="on_off_status" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, item_name, cat_id, root_cat_id, sell_counts, on_off_status, content, created_time, updated_time
+        from  items
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, item_name, cat_id, root_cat_id, sell_counts, on_off_status, content, created_time, updated_time
+        from  items
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, item_name, cat_id, root_cat_id, sell_counts, on_off_status, content, created_time, updated_time
+        from  items
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="itemName != null and itemName != ''">
+                and item_name = #{itemName}
+            </if>
+            <if test="catId != null">
+                and cat_id = #{catId}
+            </if>
+            <if test="rootCatId != null">
+                and root_cat_id = #{rootCatId}
+            </if>
+            <if test="sellCounts != null">
+                and sell_counts = #{sellCounts}
+            </if>
+            <if test="onOffStatus != null">
+                and on_off_status = #{onOffStatus}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into  items(item_name, cat_id, root_cat_id, sell_counts, on_off_status, content, created_time, updated_time)
+        values (#{itemName}, #{catId}, #{rootCatId}, #{sellCounts}, #{onOffStatus}, #{content}, #{createdTime}, #{updatedTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update  items
+        <set>
+            <if test="itemName != null and itemName != ''">
+                item_name = #{itemName},
+            </if>
+            <if test="catId != null">
+                cat_id = #{catId},
+            </if>
+            <if test="rootCatId != null">
+                root_cat_id = #{rootCatId},
+            </if>
+            <if test="sellCounts != null">
+                sell_counts = #{sellCounts},
+            </if>
+            <if test="onOffStatus != null">
+                on_off_status = #{onOffStatus},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from  items where id = #{id}
+    </delete>
+
+</mapper>
