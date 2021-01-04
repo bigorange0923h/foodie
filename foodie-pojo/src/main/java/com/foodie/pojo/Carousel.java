@@ -1,9 +1,12 @@
 package com.foodie.pojo;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
 
+@Data
 public class Carousel {
     /**
      * 主键

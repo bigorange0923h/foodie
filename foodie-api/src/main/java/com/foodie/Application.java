@@ -3,9 +3,11 @@ package com.foodie;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@MapperScan("com.foodie.mapper")
 @SpringBootApplication
+@MapperScan("com.foodie.mapper")
+@ComponentScan(basePackages = {"com.foodie", "org.n3r.idworker"})
 public class Application {
 
     public static void main(String[] args) {
