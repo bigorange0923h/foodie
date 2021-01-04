@@ -1,12 +1,7 @@
 package com.foodie.service.impl;
 
-import com.foodie.mapper.OrderStatusDao;
-import com.foodie.pojo.OrderStatus;
 import com.foodie.service.OrderStatusService;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * 订单状态表;订单的每个状态更改都需要进行记录
@@ -18,64 +13,5 @@ import java.util.List;
  */
 @Service("orderStatusService")
 public class OrderStatusServiceImpl implements OrderStatusService {
-    @Resource
-    private OrderStatusDao orderStatusDao;
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param orderId 主键
-     * @return 实例对象
-     */
-    @Override
-    public OrderStatus queryById(String orderId) {
-        return this.orderStatusDao.queryById(orderId);
-    }
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    @Override
-    public List<OrderStatus> queryAllByLimit(int offset, int limit) {
-        return this.orderStatusDao.queryAllByLimit(offset, limit);
-    }
-
-    /**
-     * 新增数据
-     *
-     * @param orderStatus 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public OrderStatus insert(OrderStatus orderStatus) {
-        this.orderStatusDao.insert(orderStatus);
-        return orderStatus;
-    }
-
-    /**
-     * 修改数据
-     *
-     * @param orderStatus 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public OrderStatus update(OrderStatus orderStatus) {
-        this.orderStatusDao.update(orderStatus);
-        return this.queryById(orderStatus.getOrderId());
-    }
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param orderId 主键
-     * @return 是否成功
-     */
-    @Override
-    public boolean deleteById(String orderId) {
-        return this.orderStatusDao.deleteById(orderId) > 0;
-    }
 }

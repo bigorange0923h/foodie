@@ -15,21 +15,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("orderItems")
 public class OrderItemsController {
-    /**
-     * 服务对象
-     */
-    @Resource
-    private OrderItemsService orderItemsService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public OrderItems selectOne(String id) {
-        return this.orderItemsService.queryById(id);
-    }
 
 }

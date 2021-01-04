@@ -16,8 +16,5 @@ public class HelloController {
         return "Hello world!";
     }
 
-    @GetMapping("/getStu")
-    public Object getStu(Integer id){
-        return stuService.queryById(id);
-    }
+
 }

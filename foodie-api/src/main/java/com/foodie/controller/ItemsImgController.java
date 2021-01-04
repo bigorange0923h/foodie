@@ -15,21 +15,5 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("itemsImg")
 public class ItemsImgController {
-    /**
-     * 服务对象
-     */
-    @Resource
-    private ItemsImgService itemsImgService;
-
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public ItemsImg selectOne(String id) {
-        return this.itemsImgService.queryById(id);
-    }
 
 }
