@@ -1,6 +1,8 @@
 package com.foodie.service;
 
 import com.foodie.pojo.Users;
+import com.foodie.pojo.bo.UserBo;
+
 import java.util.List;
 
 /**
@@ -18,4 +20,6 @@ public interface UsersService {
      * @return
      */
     boolean usernameIsExist(String userName);
+
+    Users createUser(UserBo userBo);
 }

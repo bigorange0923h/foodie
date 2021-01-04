@@ -1,10 +1,12 @@
-package com.imooc.utils;
-
-import java.text.*;
-import java.util.*;
+package com.foodie.utils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class DateUtil {
 
