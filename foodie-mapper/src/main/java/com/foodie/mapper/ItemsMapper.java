@@ -1,7 +1,6 @@
-package com.imooc.mapper;
+package com.foodie.mapper;
 
-import com.imooc.my.mapper.MyMapper;
-import com.imooc.pojo.Items;
+import com.foodie.pojo.Items;
 
 public interface ItemsMapper extends MyMapper<Items> {
 }

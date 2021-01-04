@@ -1,4 +1,4 @@
-package com.imooc.pojo;
+package com.foodie.pojo;
 
 import javax.persistence.Id;
 

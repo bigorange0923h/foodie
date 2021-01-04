@@ -1,7 +1,6 @@
-package com.imooc.mapper;
+package com.foodie.mapper;
 
-import com.imooc.my.mapper.MyMapper;
-import com.imooc.pojo.UserAddress;
+import com.foodie.pojo.UserAddress;
 
 public interface UserAddressMapper extends MyMapper<UserAddress> {
 }

@@ -1,11 +1,11 @@
-package com.imooc.utils;
+package com.foodie.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 
- * @Title: IMOOCJSONResult.java
+ * @Title: JSONResult.java
  * @Package com.imooc.utils
  * @Description: 自定义响应数据结构
  * 				本类可提供给 H5/ios/安卓/公众号/小程序 使用
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author 慕课网 - 风间影月
  * @version V1.0
  */
-public class IMOOCJSONResult {
+public class JSONResult {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -39,60 +39,60 @@ public class IMOOCJSONResult {
     @JsonIgnore
     private String ok;	// 不使用
 
-    public static IMOOCJSONResult build(Integer status, String msg, Object data) {
-        return new IMOOCJSONResult(status, msg, data);
+    public static JSONResult build(Integer status, String msg, Object data) {
+        return new JSONResult(status, msg, data);
     }
 
-    public static IMOOCJSONResult build(Integer status, String msg, Object data, String ok) {
-        return new IMOOCJSONResult(status, msg, data, ok);
+    public static JSONResult build(Integer status, String msg, Object data, String ok) {
+        return new JSONResult(status, msg, data, ok);
     }
     
-    public static IMOOCJSONResult ok(Object data) {
-        return new IMOOCJSONResult(data);
+    public static JSONResult ok(Object data) {
+        return new JSONResult(data);
     }
 
-    public static IMOOCJSONResult ok() {
-        return new IMOOCJSONResult(null);
+    public static JSONResult ok() {
+        return new JSONResult(null);
     }
     
-    public static IMOOCJSONResult errorMsg(String msg) {
-        return new IMOOCJSONResult(500, msg, null);
+    public static JSONResult errorMsg(String msg) {
+        return new JSONResult(500, msg, null);
     }
     
-    public static IMOOCJSONResult errorMap(Object data) {
-        return new IMOOCJSONResult(501, "error", data);
+    public static JSONResult errorMap(Object data) {
+        return new JSONResult(501, "error", data);
     }
     
-    public static IMOOCJSONResult errorTokenMsg(String msg) {
-        return new IMOOCJSONResult(502, msg, null);
+    public static JSONResult errorTokenMsg(String msg) {
+        return new JSONResult(502, msg, null);
     }
     
-    public static IMOOCJSONResult errorException(String msg) {
-        return new IMOOCJSONResult(555, msg, null);
+    public static JSONResult errorException(String msg) {
+        return new JSONResult(555, msg, null);
     }
     
-    public static IMOOCJSONResult errorUserQQ(String msg) {
-        return new IMOOCJSONResult(556, msg, null);
+    public static JSONResult errorUserQQ(String msg) {
+        return new JSONResult(556, msg, null);
     }
 
-    public IMOOCJSONResult() {
+    public JSONResult() {
 
     }
 
-    public IMOOCJSONResult(Integer status, String msg, Object data) {
+    public JSONResult(Integer status, String msg, Object data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
     }
     
-    public IMOOCJSONResult(Integer status, String msg, Object data, String ok) {
+    public JSONResult(Integer status, String msg, Object data, String ok) {
         this.status = status;
         this.msg = msg;
         this.data = data;
         this.ok = ok;
     }
 
-    public IMOOCJSONResult(Object data) {
+    public JSONResult(Object data) {
         this.status = 200;
         this.msg = "OK";
         this.data = data;

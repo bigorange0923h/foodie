@@ -15,21 +15,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("stu")
 public class StuController {
-    /**
-     * 服务对象
-     */
-    @Resource
-    private StuService stuService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Stu selectOne(Integer id) {
-        return this.stuService.queryById(id);
-    }
 
 }

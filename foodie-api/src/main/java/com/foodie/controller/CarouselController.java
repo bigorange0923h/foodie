@@ -15,21 +15,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("carousel")
 public class CarouselController {
-    /**
-     * 服务对象
-     */
-    @Resource
-    private CarouselService carouselService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Carousel selectOne(String id) {
-        return this.carouselService.queryById(id);
-    }
 
 }
