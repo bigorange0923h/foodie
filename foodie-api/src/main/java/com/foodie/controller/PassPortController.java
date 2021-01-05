@@ -70,6 +70,7 @@ public class PassPortController {
         Users user = usersService.createUser(userBo);
         CookieUtils.setCookie(request,response,"user",
                 JsonUtils.objectToJson(setNullProperty(user)),true);
+
         return  JSONResult.ok();
     }
 
