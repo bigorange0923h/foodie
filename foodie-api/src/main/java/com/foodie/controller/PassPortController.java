@@ -4,12 +4,14 @@ package com.foodie.controller;
 import com.foodie.pojo.bo.UserBo;
 import com.foodie.service.UsersService;
 import com.foodie.utils.JSONResult;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("passport")
+@Api(value = "注册登录",tags = {"用于注册登录接口"})
 public class PassPortController {
 
     @Autowired
