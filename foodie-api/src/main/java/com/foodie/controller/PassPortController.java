@@ -1,9 +1,11 @@
 package com.foodie.controller;
 
 
+import com.foodie.pojo.Users;
 import com.foodie.pojo.bo.UserBo;
 import com.foodie.service.UsersService;
 import com.foodie.utils.JSONResult;
+import com.foodie.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -61,6 +63,28 @@ public class PassPortController {
         }
             usersService.createUser(userBo);
         return  JSONResult.ok();
+    }
+
+    @ApiOperation(value = "用户登录", notes = "用户登录", httpMethod = "POST")
+    @PostMapping("/login")
+    public JSONResult login(@RequestBody UserBo userBo) throws Exception {
+        //判断用户名和密码是否为空
+        if(StringUtils.isBlank(userBo.getUsername())  ||
+                StringUtils.isBlank(userBo.getPassword()) ){
+            return  JSONResult.errorMsg("用户名或者密码不能为空!");
+        }
+
+        //判断密码长度
+        if(userBo.getPassword().length() <6 || userBo.getPassword().length() > 18){
+            return  JSONResult.errorMsg("密码长度至少大于6位,小于18位");
+        }
+
+        //实现登录
+        Users users = usersService.queryUserForLogin(userBo.getUsername(), MD5Utils.getMD5Str(userBo.getPassword()));
+        if (users == null){
+            return JSONResult.errorMsg("用户名或者密码不正确!");
+        }
+        return  JSONResult.ok(users);
     }
 
 

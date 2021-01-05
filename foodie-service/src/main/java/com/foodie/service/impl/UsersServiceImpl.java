@@ -36,6 +36,7 @@ public class UsersServiceImpl implements UsersService {
 
     private static final String USER_FACE = "http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png";
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public boolean usernameIsExist(String userName) {
         Example userExample = new Example(Users.class);
@@ -67,5 +68,15 @@ public class UsersServiceImpl implements UsersService {
         user.setUpdatedTime(new Date());
         usersMapper.insert(user);
         return user;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Users queryUserForLogin(String username, String password) {
+        Example userExample = new Example(Users.class);
+        Example.Criteria userCriteria = userExample.createCriteria();
+        userCriteria.andEqualTo("username", username);
+        userCriteria.andEqualTo("password", password);
+        return usersMapper.selectOneByExample(userExample);
     }
 }
