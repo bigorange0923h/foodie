@@ -5,6 +5,7 @@ import com.foodie.pojo.bo.UserBo;
 import com.foodie.service.UsersService;
 import com.foodie.utils.JSONResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class PassPortController {
     UsersService usersService;
 
 
-
+    @ApiOperation(value = "用户名是否存在", notes = "用户名是否存在", httpMethod = "GET")
     @GetMapping("/usernameIsExist")
     public JSONResult usernameIsExist(@RequestParam String  userName){
         if(StringUtils.isBlank(userName)){
@@ -31,11 +32,8 @@ public class PassPortController {
     }
 
 
-    /**
-     * 用户注册
-     * @param userBo
-     * @return
-     */
+
+    @ApiOperation(value = "用户注册", notes = "用户注册", httpMethod = "POST")
     @PostMapping("/regist")
     public JSONResult regist(@RequestBody UserBo userBo){
 
