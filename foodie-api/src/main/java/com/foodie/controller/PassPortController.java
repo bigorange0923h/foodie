@@ -4,13 +4,18 @@ package com.foodie.controller;
 import com.foodie.pojo.Users;
 import com.foodie.pojo.bo.UserBo;
 import com.foodie.service.UsersService;
+import com.foodie.utils.CookieUtils;
 import com.foodie.utils.JSONResult;
+import com.foodie.utils.JsonUtils;
 import com.foodie.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("passport")
@@ -37,7 +42,8 @@ public class PassPortController {
 
     @ApiOperation(value = "用户注册", notes = "用户注册", httpMethod = "POST")
     @PostMapping("/regist")
-    public JSONResult regist(@RequestBody UserBo userBo){
+    public JSONResult regist(@RequestBody UserBo userBo,HttpServletRequest request,
+                             HttpServletResponse response){
 
 
         //判断用户名和密码是否为空
@@ -61,13 +67,16 @@ public class PassPortController {
         if(usersService.usernameIsExist(userBo.getUsername())){
             return JSONResult.errorMsg("用户名已存在!");
         }
-            usersService.createUser(userBo);
+        Users user = usersService.createUser(userBo);
+        CookieUtils.setCookie(request,response,"user",
+                JsonUtils.objectToJson(setNullProperty(user)),true);
         return  JSONResult.ok();
     }
 
     @ApiOperation(value = "用户登录", notes = "用户登录", httpMethod = "POST")
     @PostMapping("/login")
-    public JSONResult login(@RequestBody UserBo userBo) throws Exception {
+    public JSONResult login(@RequestBody UserBo userBo, HttpServletRequest request,
+                            HttpServletResponse response) throws Exception {
         //判断用户名和密码是否为空
         if(StringUtils.isBlank(userBo.getUsername())  ||
                 StringUtils.isBlank(userBo.getPassword()) ){
@@ -84,9 +93,21 @@ public class PassPortController {
         if (users == null){
             return JSONResult.errorMsg("用户名或者密码不正确!");
         }
+        CookieUtils.setCookie(request,response,"user",
+                JsonUtils.objectToJson(setNullProperty(users)),true);
+
         return  JSONResult.ok(users);
     }
 
+    private Users setNullProperty(Users userResult) {
+        userResult.setPassword(null);
+        userResult.setMobile(null);
+        userResult.setEmail(null);
+        userResult.setCreatedTime(null);
+        userResult.setUpdatedTime(null);
+        userResult.setBirthday(null);
+        return userResult;
+    }
 
 
 }

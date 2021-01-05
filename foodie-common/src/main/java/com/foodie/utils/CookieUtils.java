@@ -1,4 +1,4 @@
-package com.imooc.utils;
+package com.foodie.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,7 +104,7 @@ public final class CookieUtils {
      * @param cookieValue
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue) {
+                                 String cookieValue) {
         setCookie(request, response, cookieName, cookieValue, -1);
     }
 
@@ -118,7 +118,7 @@ public final class CookieUtils {
      * @param cookieMaxage
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, int cookieMaxage) {
+                                 String cookieValue, int cookieMaxage) {
         setCookie(request, response, cookieName, cookieValue, cookieMaxage, false);
     }
 
@@ -136,7 +136,7 @@ public final class CookieUtils {
      * @param isEncode
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, boolean isEncode) {
+                                 String cookieValue, boolean isEncode) {
         setCookie(request, response, cookieName, cookieValue, -1, isEncode);
     }
 
@@ -151,7 +151,7 @@ public final class CookieUtils {
     * @param isEncode
     */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, int cookieMaxage, boolean isEncode) {
+                                 String cookieValue, int cookieMaxage, boolean isEncode) {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
     }
 
@@ -166,7 +166,7 @@ public final class CookieUtils {
      * @param encodeString
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
-            String cookieValue, int cookieMaxage, String encodeString) {
+                                 String cookieValue, int cookieMaxage, String encodeString) {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, encodeString);
     }
 
@@ -178,7 +178,7 @@ public final class CookieUtils {
      * @param cookieName
      */
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response,
-            String cookieName) {
+                                    String cookieName) {
         doSetCookie(request, response, cookieName, null, -1, false);
 //        doSetCookie(request, response, cookieName, "", -1, false);
     }
@@ -195,7 +195,7 @@ public final class CookieUtils {
      * @param isEncode
      */
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
-            String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
+                                          String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         try {
             if (cookieValue == null) {
                 cookieValue = "";
@@ -230,7 +230,7 @@ public final class CookieUtils {
      * @param encodeString
      */
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
-            String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
+                                          String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
         try {
             if (cookieValue == null) {
                 cookieValue = "";
