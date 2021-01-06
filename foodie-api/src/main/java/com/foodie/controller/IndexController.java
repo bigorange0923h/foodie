@@ -6,6 +6,7 @@ import com.foodie.pojo.Carousel;
 import com.foodie.pojo.Users;
 import com.foodie.pojo.bo.UserBo;
 import com.foodie.service.CarouselService;
+import com.foodie.service.CategoryService;
 import com.foodie.service.UsersService;
 import com.foodie.utils.CookieUtils;
 import com.foodie.utils.JSONResult;
@@ -13,6 +14,7 @@ import com.foodie.utils.JsonUtils;
 import com.foodie.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +28,8 @@ public class IndexController {
 
     @Autowired
     private CarouselService carouselService;
-
+    @Autowired
+    private CategoryService categoryService;
 
     @ApiOperation(value = "获取首页轮播图列表", notes = "获取首页轮播图列表", httpMethod = "GET")
     @GetMapping("/carousel")
@@ -41,7 +44,22 @@ public class IndexController {
      * 2. 如果鼠标上移到大分类，则加载其子分类的内容，如果已经存在子分类，则不需要加载（懒加载）
      */
 
+    @ApiOperation(value = "获取商品分类(一级分类)", notes = "获取商品分类(一级分类)", httpMethod = "GET")
+    @GetMapping("/cats")
+    public JSONResult cats(){
+        return JSONResult.ok(categoryService.queryAllRootLevelCat());
+    }
 
+    @ApiOperation(value = "获取商品分类(子分类)", notes = "获取商品分类(子分类)", httpMethod = "GET")
+    @GetMapping("/subCat/{rootCatId}")
+    public JSONResult subCat(
+            @ApiParam(name="rootCatId",value = "一级分类ID",required = true)
+            @PathVariable Integer rootCatId){
+        if(rootCatId == null){
+             return JSONResult.errorMsg("分类不存在");
+        }
+        return JSONResult.ok(categoryService.getSubCatList(rootCatId));
+    }
 
 
 }
