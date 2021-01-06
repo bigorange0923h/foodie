@@ -1,9 +1,10 @@
 package com.foodie.mapper;
 
+import com.foodie.my.mapper.MyMapper;
 import com.foodie.pojo.Users;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
-@Mapper
+@Repository
 public interface UsersMapper extends MyMapper<Users> {
     //void usernameIsExist(String userName);
 }

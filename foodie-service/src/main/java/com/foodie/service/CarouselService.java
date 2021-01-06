@@ -11,4 +11,10 @@ import java.util.List;
  */
 public interface CarouselService {
 
+    /**
+     * 获取所有轮播图
+     * @param isShow
+     * @return
+     */
+    public List<Carousel> queryAll(Integer isShow);
 }
