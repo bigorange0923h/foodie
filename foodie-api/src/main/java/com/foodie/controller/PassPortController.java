@@ -100,6 +100,15 @@ public class PassPortController {
         return  JSONResult.ok(users);
     }
 
+    @ApiOperation(value = "退出登录", notes = "退出登录", httpMethod = "POST")
+    @PostMapping("/logout")
+    public JSONResult logout(@RequestBody String userId, HttpServletRequest request,
+                            HttpServletResponse response) throws Exception {
+        //清除用户的相关信息的cookie
+        CookieUtils.deleteCookie(request,response,"user");
+        return  JSONResult.ok();
+    }
+
     private Users setNullProperty(Users userResult) {
         userResult.setPassword(null);
         userResult.setMobile(null);
