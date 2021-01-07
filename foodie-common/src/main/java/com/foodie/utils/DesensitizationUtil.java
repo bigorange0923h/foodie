@@ -1,6 +1,4 @@
-package com.imooc.utils;
-
-import sun.applet.Main;
+package com.foodie.utils;
 
 /**
  * 通用脱敏工具类

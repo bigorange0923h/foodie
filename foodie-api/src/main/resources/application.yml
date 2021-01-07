@@ -39,3 +39,7 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml # mapper映射文件
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  support-methods-arguments: true

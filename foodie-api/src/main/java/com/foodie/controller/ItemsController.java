@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("items")
 @Api(value = "商品接口",tags = {"商品信息展示的相关接口"})
-public class ItemsController {
+public class ItemsController extends BaseController{
 
     @Autowired
     private ItemsService itemsService;
@@ -56,5 +56,26 @@ public class ItemsController {
             return JSONResult.errorMsg(null);
         }
         return JSONResult.ok(itemsService.queryCommentCounts(itemId));
+    }
+
+    @ApiOperation(value = "查询商品评论", notes = "查询商品评论", httpMethod = "GET")
+    @GetMapping("/comments")
+    public JSONResult comments(
+            @ApiParam(name = "itemId",value = "商品ID",required = true) @RequestParam String itemId,
+            @ApiParam(name = "level",value = "评价等级",required = false) @RequestParam Integer level,
+            @ApiParam(name = "page",value = "当前页数",required = false) @RequestParam Integer page,
+            @ApiParam(name = "pageSize",value = "当前页数量",required = false) @RequestParam Integer pageSize
+    ){
+
+        if(StringUtils.isBlank(itemId)){
+            return JSONResult.errorMsg(null);
+        }
+        if(page == null){
+            page = COMMENT_PAGE;
+        }
+        if(pageSize == null){
+            page =COMMENT_PAGE_SIZE;
+        }
+        return JSONResult.ok(itemsService.queryPagedComments(itemId,level,page,pageSize));
     }
 }
