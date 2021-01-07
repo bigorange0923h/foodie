@@ -1,4 +1,4 @@
-package com.foodie;
+package com.foodie.enums;
 
 public enum YesOrNo {
     NO(0,"否"),

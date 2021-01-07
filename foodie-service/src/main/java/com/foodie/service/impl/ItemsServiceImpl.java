@@ -1,13 +1,9 @@
 package com.foodie.service.impl;
 
-import com.foodie.mapper.ItemsImgMapper;
-import com.foodie.mapper.ItemsMapper;
-import com.foodie.mapper.ItemsParamMapper;
-import com.foodie.mapper.ItemsSpecMapper;
-import com.foodie.pojo.Items;
-import com.foodie.pojo.ItemsImg;
-import com.foodie.pojo.ItemsParam;
-import com.foodie.pojo.ItemsSpec;
+import com.foodie.enums.CommentLevel;
+import com.foodie.mapper.*;
+import com.foodie.pojo.*;
+import com.foodie.pojo.vo.CommentLevelCountsVO;
 import com.foodie.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +30,9 @@ public class ItemsServiceImpl implements ItemsService {
     private ItemsSpecMapper itemsSpecMapper;
     @Autowired
     private ItemsParamMapper itemsParamMapper;
+    @Autowired
+    private ItemsCommentsMapper itemsCommentsMapper;
+
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Items queryItemsById(String id) {
@@ -63,5 +62,28 @@ public class ItemsServiceImpl implements ItemsService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("itemId",itemId);
         return itemsParamMapper.selectOneByExample(example);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public CommentLevelCountsVO queryCommentCounts(String itemId) {
+        Integer goodCounts = getCommentCounts(itemId, CommentLevel.GOOD.type);
+        Integer normalCounts = getCommentCounts(itemId, CommentLevel.NORMAL.type);
+        Integer badCounts = getCommentCounts(itemId, CommentLevel.BAD.type);
+        Integer totalCounts = goodCounts+normalCounts+badCounts;
+        CommentLevelCountsVO commentLevelCountsVO = new CommentLevelCountsVO();
+            commentLevelCountsVO.setBadCounts(badCounts);
+            commentLevelCountsVO.setGoodCounts(goodCounts);
+            commentLevelCountsVO.setNormalCounts(normalCounts);
+            commentLevelCountsVO.setTotalCounts(totalCounts);
+        return commentLevelCountsVO;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    private Integer  getCommentCounts(String itemId,Integer level){
+        ItemsComments condition = new ItemsComments();
+        condition.setItemId(itemId);
+        condition.setCommentLevel(level);
+        return itemsCommentsMapper.selectCount(condition);
     }
 }

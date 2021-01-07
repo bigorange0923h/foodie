@@ -1,21 +1,13 @@
 package com.foodie.controller;
 
 
-import com.foodie.YesOrNo;
-import com.foodie.pojo.Carousel;
-import com.foodie.pojo.Users;
-import com.foodie.pojo.bo.UserBo;
+import com.foodie.enums.YesOrNo;
 import com.foodie.service.CarouselService;
 import com.foodie.service.CategoryService;
-import com.foodie.service.UsersService;
-import com.foodie.utils.CookieUtils;
 import com.foodie.utils.JSONResult;
-import com.foodie.utils.JsonUtils;
-import com.foodie.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,6 +63,7 @@ public class IndexController {
         }
         return JSONResult.ok(categoryService.getSixNewItemsLazy(rootCatId));
     }
+
 
 
 }

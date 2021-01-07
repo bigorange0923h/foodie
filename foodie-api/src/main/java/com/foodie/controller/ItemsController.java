@@ -4,6 +4,7 @@ import com.foodie.pojo.Items;
 import com.foodie.pojo.ItemsImg;
 import com.foodie.pojo.ItemsParam;
 import com.foodie.pojo.ItemsSpec;
+import com.foodie.pojo.vo.CommentLevelCountsVO;
 import com.foodie.pojo.vo.ItemInfoVO;
 import com.foodie.service.ItemsService;
 import com.foodie.utils.JSONResult;
@@ -45,5 +46,15 @@ public class ItemsController {
         itemInfoVO.setItemParams(itemsService.queryItemsParam(itemId));
         itemInfoVO.setItemSpecList(itemsService.queryItemsSpecList(itemId));
         return JSONResult.ok(itemInfoVO);
+    }
+
+    @ApiOperation(value = "查询商品商品评价等级", notes = "查询商品商品评价等级", httpMethod = "GET")
+    @GetMapping("/commentLevel")
+    public JSONResult commentLevel(@ApiParam(name = "itemId",value = "商品ID",required = true)
+                           @RequestParam String itemId){
+        if(StringUtils.isBlank(itemId)){
+            return JSONResult.errorMsg(null);
+        }
+        return JSONResult.ok(itemsService.queryCommentCounts(itemId));
     }
 }
