@@ -1,6 +1,10 @@
 package com.foodie.service;
 
 import com.foodie.pojo.Items;
+import com.foodie.pojo.ItemsImg;
+import com.foodie.pojo.ItemsParam;
+import com.foodie.pojo.ItemsSpec;
+
 import java.util.List;
 
 /**
@@ -11,6 +15,33 @@ import java.util.List;
  */
 public interface ItemsService {
 
+    /**
+     * 根据商品ID查询详情
+     * @param id
+     * @return
+     */
+    public Items queryItemsById(String id);
+
+    /**
+     * 根据商品ID查询商品图片列表
+     * @param itemId
+     * @return
+     */
+    public List<ItemsImg> queryItemsImgList(String itemId);
+
+    /**
+     * 根据商品ID查询商品规格
+     * @param itemId
+     * @return
+     */
+    public List<ItemsSpec> queryItemsSpecList(String itemId);
+
+    /**
+     * 根据商品ID查询参数
+     * @param itemId
+     * @return
+     */
+    public ItemsParam queryItemsParam(String itemId);
 
 
 }

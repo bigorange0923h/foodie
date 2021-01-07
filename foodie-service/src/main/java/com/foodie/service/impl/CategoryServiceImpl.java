@@ -4,6 +4,7 @@ import com.foodie.mapper.CategoryMapper;
 import com.foodie.mapper.CategoryMapperCustom;
 import com.foodie.pojo.Category;
 import com.foodie.pojo.vo.CategoryVO;
+import com.foodie.pojo.vo.NewItemsVO;
 import com.foodie.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品分类(Category)表服务实现类
@@ -43,5 +46,11 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryVO> getSubCatList(Integer rootCatId) {
         return categoryMapperCustom.getSubCatList(rootCatId);
 
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId) {
+        return categoryMapperCustom.getSixNewItemsLazy(rootCatId);
     }
 }

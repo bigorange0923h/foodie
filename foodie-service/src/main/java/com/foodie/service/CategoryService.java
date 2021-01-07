@@ -2,6 +2,7 @@ package com.foodie.service;
 
 import com.foodie.pojo.Category;
 import com.foodie.pojo.vo.CategoryVO;
+import com.foodie.pojo.vo.NewItemsVO;
 
 import java.util.List;
 
@@ -26,4 +27,11 @@ public interface CategoryService {
      */
     public List <CategoryVO> getSubCatList(Integer rootCatId);
 
+
+    /**
+     * 查询首页每个一级分类的下的6条最新商品的数据
+     * @param rootCatId
+     * @return
+     */
+    public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId);
 }
