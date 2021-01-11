@@ -114,5 +114,25 @@ public class ItemsServiceImpl extends MyService implements ItemsService {
         return setterPagedGrid(itemCommentVOS,page);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult searchItems(String keywords, String sort, Integer page, Integer pageSize) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("keywords",keywords);
+        map.put("sort",sort);
+        PageHelper.startPage(page,pageSize);
+        return setterPagedGrid(itemsMapperCustom.searchItems(map),page);
 
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult searchItems(Integer catId, String sort, Integer page, Integer pageSize) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("catId",catId);
+        map.put("sort",sort);
+        PageHelper.startPage(page,pageSize);
+        return setterPagedGrid(itemsMapperCustom.searchItemsByThirdCat(map),page);
+
+    }
 }
