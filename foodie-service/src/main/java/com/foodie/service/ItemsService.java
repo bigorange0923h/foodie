@@ -6,6 +6,7 @@ import com.foodie.pojo.ItemsParam;
 import com.foodie.pojo.ItemsSpec;
 import com.foodie.pojo.vo.CommentLevelCountsVO;
 import com.foodie.pojo.vo.ItemCommentVO;
+import com.foodie.pojo.vo.ShopcartVO;
 import com.foodie.utils.PagedGridResult;
 
 import java.util.List;
@@ -82,4 +83,11 @@ public interface ItemsService {
      * @return
      */
     public PagedGridResult searchItems(Integer catId, String sort, Integer page, Integer pageSize);
+
+    /**
+     * 根据ids查询并且刷新购物车中最新的商品信息
+     * @param specIds
+     * @return
+     */
+    public List<ShopcartVO> queryItemsBySpecIds(String specIds);
 }

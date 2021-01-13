@@ -71,6 +71,9 @@ public class PassPortController {
         CookieUtils.setCookie(request,response,"user",
                 JsonUtils.objectToJson(setNullProperty(user)),true);
 
+        //TODO 生成用户token,存入redis 会话
+        //TODO 同步购物车数据
+
         return  JSONResult.ok();
     }
 
@@ -96,7 +99,8 @@ public class PassPortController {
         }
         CookieUtils.setCookie(request,response,"user",
                 JsonUtils.objectToJson(setNullProperty(users)),true);
-
+        //TODO 生成用户token,存入redis 会话
+        //TODO 同步购物车数据
         return  JSONResult.ok(users);
     }
 

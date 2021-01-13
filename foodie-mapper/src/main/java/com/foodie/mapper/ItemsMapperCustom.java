@@ -3,6 +3,7 @@ package com.foodie.mapper;
 
 import com.foodie.pojo.vo.ItemCommentVO;
 import com.foodie.pojo.vo.SearchItemsVO;
+import com.foodie.pojo.vo.ShopcartVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,5 @@ public interface ItemsMapperCustom {
 
     public List<SearchItemsVO> searchItemsByThirdCat(@Param("paramsMap") Map<String, Object> map);
 
+    public List<ShopcartVO> queryItemsBySpecIds(@Param("paramsList") List specIdsList);
 }

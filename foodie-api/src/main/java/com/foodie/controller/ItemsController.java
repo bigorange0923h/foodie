@@ -26,17 +26,17 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("items")
-@Api(value = "商品接口",tags = {"商品信息展示的相关接口"})
-public class ItemsController extends BaseController{
+@Api(value = "商品接口", tags = {"商品信息展示的相关接口"})
+public class ItemsController extends BaseController {
 
     @Autowired
     private ItemsService itemsService;
 
     @ApiOperation(value = "查询商品详情", notes = "查询商品详情", httpMethod = "GET")
     @GetMapping("/info/{itemId}")
-    public JSONResult info(@ApiParam(name = "itemId",value = "商品ID",required = true)
-                           @PathVariable String itemId){
-        if(StringUtils.isBlank(itemId)){
+    public JSONResult info(@ApiParam(name = "itemId", value = "商品ID", required = true)
+                           @PathVariable String itemId) {
+        if (StringUtils.isBlank(itemId)) {
             return JSONResult.errorMsg(null);
         }
 
@@ -50,9 +50,9 @@ public class ItemsController extends BaseController{
 
     @ApiOperation(value = "查询商品商品评价等级", notes = "查询商品商品评价等级", httpMethod = "GET")
     @GetMapping("/commentLevel")
-    public JSONResult commentLevel(@ApiParam(name = "itemId",value = "商品ID",required = true)
-                           @RequestParam String itemId){
-        if(StringUtils.isBlank(itemId)){
+    public JSONResult commentLevel(@ApiParam(name = "itemId", value = "商品ID", required = true)
+                                   @RequestParam String itemId) {
+        if (StringUtils.isBlank(itemId)) {
             return JSONResult.errorMsg(null);
         }
         return JSONResult.ok(itemsService.queryCommentCounts(itemId));
@@ -61,68 +61,83 @@ public class ItemsController extends BaseController{
     @ApiOperation(value = "查询商品评论", notes = "查询商品评论", httpMethod = "GET")
     @GetMapping("/comments")
     public JSONResult comments(
-            @ApiParam(name = "itemId",value = "商品ID",required = true) @RequestParam String itemId,
-            @ApiParam(name = "level",value = "评价等级",required = false) @RequestParam Integer level,
-            @ApiParam(name = "page",value = "当前页数",required = false) @RequestParam Integer page,
-            @ApiParam(name = "pageSize",value = "当前页数量",required = false) @RequestParam Integer pageSize
-    ){
+            @ApiParam(name = "itemId", value = "商品ID", required = true) @RequestParam String itemId,
+            @ApiParam(name = "level", value = "评价等级", required = false) @RequestParam Integer level,
+            @ApiParam(name = "page", value = "当前页数", required = false) @RequestParam Integer page,
+            @ApiParam(name = "pageSize", value = "当前页数量", required = false) @RequestParam Integer pageSize
+    ) {
 
-        if(StringUtils.isBlank(itemId)){
+        if (StringUtils.isBlank(itemId)) {
             return JSONResult.errorMsg(null);
         }
-        if(page == null){
+        if (page == null) {
             page = COMMENT_PAGE;
         }
-        if(pageSize == null){
-            page =COMMENT_PAGE_SIZE;
+        if (pageSize == null) {
+            page = COMMENT_PAGE_SIZE;
         }
-        return JSONResult.ok(itemsService.queryPagedComments(itemId,level,page,pageSize));
+        return JSONResult.ok(itemsService.queryPagedComments(itemId, level, page, pageSize));
     }
 
     @ApiOperation(value = "搜索商品列表", notes = "搜索商品列表", httpMethod = "GET")
     @GetMapping("/search")
     public JSONResult search(
-            @ApiParam(name = "keywords",value = "关键字",required = true)
+            @ApiParam(name = "keywords", value = "关键字", required = true)
             @RequestParam String keywords,
-            @ApiParam(name = "sort",value = "排序",required = false)
+            @ApiParam(name = "sort", value = "排序", required = false)
             @RequestParam String sort,
-            @ApiParam(name = "page",value = "当前页数",required = false) @RequestParam Integer page,
-            @ApiParam(name = "pageSize",value = "当前页数量",required = false) @RequestParam Integer pageSize
-    ){
+            @ApiParam(name = "page", value = "当前页数", required = false) @RequestParam Integer page,
+            @ApiParam(name = "pageSize", value = "当前页数量", required = false) @RequestParam Integer pageSize
+    ) {
 
-        if(StringUtils.isBlank(keywords)){
+        if (StringUtils.isBlank(keywords)) {
             return JSONResult.errorMsg(null);
         }
-        if(page == null){
+        if (page == null) {
             page = COMMENT_PAGE;
         }
-        if(pageSize == null){
-            page =COMMENT_PAGE_SIZE;
+        if (pageSize == null) {
+            page = COMMENT_PAGE_SIZE;
         }
-        return JSONResult.ok(itemsService.searchItems(keywords,sort,page,pageSize));
+        return JSONResult.ok(itemsService.searchItems(keywords, sort, page, pageSize));
     }
 
 
     @ApiOperation(value = "通过分类ID搜索商品列表", notes = "通过分类ID搜索商品列表", httpMethod = "GET")
     @GetMapping("/catItems")
     public JSONResult catItems(
-            @ApiParam(name = "catId",value = "分类ID",required = true)
+            @ApiParam(name = "catId", value = "分类ID", required = true)
             @RequestParam Integer catId,
-            @ApiParam(name = "sort",value = "排序",required = false)
+            @ApiParam(name = "sort", value = "排序", required = false)
             @RequestParam String sort,
-            @ApiParam(name = "page",value = "当前页数",required = false) @RequestParam Integer page,
-            @ApiParam(name = "pageSize",value = "当前页数量",required = false) @RequestParam Integer pageSize
-    ){
+            @ApiParam(name = "page", value = "当前页数", required = false) @RequestParam Integer page,
+            @ApiParam(name = "pageSize", value = "当前页数量", required = false) @RequestParam Integer pageSize
+    ) {
 
-        if(catId == null){
+        if (catId == null) {
             return JSONResult.errorMsg(null);
         }
-        if(page == null){
+        if (page == null) {
             page = COMMENT_PAGE;
         }
-        if(pageSize == null){
-            page =COMMENT_PAGE_SIZE;
+        if (pageSize == null) {
+            page = COMMENT_PAGE_SIZE;
         }
-        return JSONResult.ok(itemsService.searchItems(catId,sort,page,pageSize));
+        return JSONResult.ok(itemsService.searchItems(catId, sort, page, pageSize));
+    }
+
+    //用于用户长时间未登录网站,刷新购物车中的数据
+    @ApiOperation(value = "根据商品规格ID查找最新的商品数据", notes = "根据商品规格ID查找最新的商品数据", httpMethod = "GET")
+    @GetMapping("/refresh")
+    public JSONResult refresh(
+            @ApiParam(name = "itemSpecIds", value = "','拼接的规格ids", required = true)
+            @RequestParam String itemSpecIds
+    ) {
+
+        if (itemSpecIds == null) {
+            return JSONResult.ok();
+        }
+
+        return JSONResult.ok(itemsService.queryItemsBySpecIds(itemSpecIds));
     }
 }

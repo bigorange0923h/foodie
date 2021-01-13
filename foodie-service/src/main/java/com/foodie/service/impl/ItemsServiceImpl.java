@@ -5,6 +5,7 @@ import com.foodie.mapper.*;
 import com.foodie.pojo.*;
 import com.foodie.pojo.vo.CommentLevelCountsVO;
 import com.foodie.pojo.vo.ItemCommentVO;
+import com.foodie.pojo.vo.ShopcartVO;
 import com.foodie.service.ItemsService;
 import com.foodie.service.com.foodie.my.service.MyService;
 import com.foodie.utils.DesensitizationUtil;
@@ -17,9 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 商品表 商品信息相关表：分类表，商品图片表，商品规格表，商品参数表(Items)表服务实现类
@@ -134,5 +133,13 @@ public class ItemsServiceImpl extends MyService implements ItemsService {
         PageHelper.startPage(page,pageSize);
         return setterPagedGrid(itemsMapperCustom.searchItemsByThirdCat(map),page);
 
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<ShopcartVO> queryItemsBySpecIds(String specIds) {
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list,specIds.split(","));
+        return itemsMapperCustom.queryItemsBySpecIds(list);
     }
 }
