@@ -12,4 +12,7 @@ import java.util.List;
 public interface UserAddressService {
 
 
+
+    List<UserAddress> queryAll(String userId);
+
 }
