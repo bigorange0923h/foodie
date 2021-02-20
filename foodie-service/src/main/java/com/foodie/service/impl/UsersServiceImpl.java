@@ -4,7 +4,7 @@ import com.foodie.enums.Sex;
 import com.foodie.mapper.UsersMapper;
 
 import com.foodie.pojo.Users;
-import com.foodie.pojo.bo.UserBo;
+import com.foodie.pojo.bo.UserBO;
 import com.foodie.service.UsersService;
 import com.foodie.utils.DateUtil;
 import com.foodie.utils.MD5Utils;
@@ -48,19 +48,19 @@ public class UsersServiceImpl implements UsersService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public Users createUser(UserBo userBo) {
+    public Users createUser(UserBO UserBO) {
 
         String userId = sid.nextShort();
         Users user = new Users();
         user.setId(userId);
-        user.setUsername(userBo.getUsername());
+        user.setUsername(UserBO.getUsername());
         try{
-        user.setPassword(MD5Utils.getMD5Str(userBo.getPassword()));
+        user.setPassword(MD5Utils.getMD5Str(UserBO.getPassword()));
         }catch ( Exception e){
             e.printStackTrace();
         }
         //用户默认属性
-        user.setNickname(userBo.getUsername());
+        user.setNickname(UserBO.getUsername());
         user.setFace(USER_FACE);
         user.setBirthday(DateUtil.stringToDate("1900-01-01"));
         user.setSex(Sex.secret.type);

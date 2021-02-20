@@ -1,6 +1,8 @@
 package com.foodie.service;
 
 import com.foodie.pojo.UserAddress;
+import com.foodie.pojo.bo.AddressBO;
+
 import java.util.List;
 
 /**
@@ -15,4 +17,11 @@ public interface UserAddressService {
 
     List<UserAddress> queryAll(String userId);
 
+    void addNewAddress(AddressBO addressBO);
+
+    void updateNewAddress(AddressBO addressBO);
+
+    void deleteUserAddress(String userId, String addressId);
+
+    void updateAddressToBeDefault(String userId, String addressId);
 }

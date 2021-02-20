@@ -2,7 +2,7 @@ package com.foodie.controller;
 
 
 import com.foodie.pojo.Users;
-import com.foodie.pojo.bo.UserBo;
+import com.foodie.pojo.bo.UserBO;
 import com.foodie.service.UsersService;
 import com.foodie.utils.CookieUtils;
 import com.foodie.utils.JSONResult;
@@ -42,7 +42,7 @@ public class PassPortController {
 
     @ApiOperation(value = "用户注册", notes = "用户注册", httpMethod = "POST")
     @PostMapping("/regist")
-    public JSONResult regist(@RequestBody UserBo userBo,HttpServletRequest request,
+    public JSONResult regist(@RequestBody UserBO userBo,HttpServletRequest request,
                              HttpServletResponse response){
 
 
@@ -79,7 +79,7 @@ public class PassPortController {
 
     @ApiOperation(value = "用户登录", notes = "用户登录", httpMethod = "POST")
     @PostMapping("/login")
-    public JSONResult login(@RequestBody UserBo userBo, HttpServletRequest request,
+    public JSONResult login(@RequestBody UserBO userBo, HttpServletRequest request,
                             HttpServletResponse response) throws Exception {
         //判断用户名和密码是否为空
         if(StringUtils.isBlank(userBo.getUsername())  ||

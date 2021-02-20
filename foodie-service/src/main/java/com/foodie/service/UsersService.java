@@ -1,7 +1,7 @@
 package com.foodie.service;
 
 import com.foodie.pojo.Users;
-import com.foodie.pojo.bo.UserBo;
+import com.foodie.pojo.bo.UserBO;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface UsersService {
      */
     boolean usernameIsExist(String userName);
 
-    Users createUser(UserBo userBo);
+    Users createUser(UserBO userBo);
 
     /**
      * 检索用户名与密码是否匹配,用于登录
