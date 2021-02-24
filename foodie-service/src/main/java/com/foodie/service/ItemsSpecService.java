@@ -11,5 +11,17 @@ import java.util.List;
  */
 public interface ItemsSpecService {
 
+    /**
+     * 根据规格ID查询商品规格信息
+     * @param specId
+     * @return
+     */
+    ItemsSpec queryItemSpecById(String specId);
 
+    /**
+     * 扣除商品库存
+     * @param specId
+     * @param buyCounts
+     */
+    public void  decreaseItemSpecStock(String specId,int buyCounts);
 }

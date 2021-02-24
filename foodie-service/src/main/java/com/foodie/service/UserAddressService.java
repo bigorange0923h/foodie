@@ -24,4 +24,12 @@ public interface UserAddressService {
     void deleteUserAddress(String userId, String addressId);
 
     void updateAddressToBeDefault(String userId, String addressId);
+
+    /**
+     * 根据用户ID和地址ID 查询具体地址信息
+     * @param userId
+     * @param addressId
+     * @return
+     */
+    UserAddress queryUserAddress(String userId, String addressId);
 }

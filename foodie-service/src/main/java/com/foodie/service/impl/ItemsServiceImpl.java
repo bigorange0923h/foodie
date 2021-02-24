@@ -1,6 +1,7 @@
 package com.foodie.service.impl;
 
 import com.foodie.enums.CommentLevel;
+import com.foodie.enums.YesOrNo;
 import com.foodie.mapper.*;
 import com.foodie.pojo.*;
 import com.foodie.pojo.vo.CommentLevelCountsVO;
@@ -141,5 +142,14 @@ public class ItemsServiceImpl extends MyService implements ItemsService {
         List<String> list = new ArrayList<>();
         Collections.addAll(list,specIds.split(","));
         return itemsMapperCustom.queryItemsBySpecIds(list);
+    }
+
+    @Override
+    public String queryItemMainImgById(String itemId) {
+        ItemsImg itemsImg = new ItemsImg();
+        itemsImg.setId(itemId);
+        itemsImg.setIsMain(YesOrNo.YES.type);
+        ItemsImg img = itemsImgMapper.selectOne(itemsImg);
+        return img != null ? img.getUrl() : "";
     }
 }

@@ -90,4 +90,11 @@ public interface ItemsService {
      * @return
      */
     public List<ShopcartVO> queryItemsBySpecIds(String specIds);
+
+    /**
+     * 根据商品ID 获取商品图片主图的URL
+     * @param itemId
+     * @return
+     */
+    public String queryItemMainImgById(String itemId);
 }

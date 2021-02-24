@@ -1,6 +1,7 @@
 package com.foodie.service;
 
 import com.foodie.pojo.Orders;
+import com.foodie.pojo.bo.SubmitOrderBO;
 
 
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.List;
  */
 public interface OrdersService {
 
-
-
+    /**
+     * 用于创建订单相关信息
+     * @param submitOrderBO
+     */
+    String create(SubmitOrderBO submitOrderBO);
 }
